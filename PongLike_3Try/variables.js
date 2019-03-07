@@ -10,6 +10,7 @@ const WORLD_HEIGHT = CANVAS_HEIGHT; //Subtract the end of the world size
 
 const playerSpeed = 3;
 const ballSpeed = 2.5;
+const ballRotationSpeed = .1;
 const MinAngleVariation = 15;
 const MaxAngleVariation = 30;
 const objectsList = [];

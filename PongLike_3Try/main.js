@@ -27,7 +27,7 @@ function init(){
 
     game.stage.addChild(background);
     game.stage.addChild(player.sprite);
-    game.stage.addChild(ball.sprite)
+    game.stage.addChild(ball.container)
     game.ticker.add(play);
 
 
