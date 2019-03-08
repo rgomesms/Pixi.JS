@@ -10,8 +10,8 @@ loader = new Loader();
 for(sprite of sprites){
     loader.add(sprite);
 }
-loader.add(enemySprite);
-// loader.add(enemySheet);
+for(sprite of enemySprites)
+    loader.add(sprite);
 loader.load(init)
 
 
@@ -25,6 +25,7 @@ function init(){
     ball = new Ball(320,400);
 
     initEnemies();
+    initAnimation();
     
     objectsList.push(player);
     game.stage.addChild(player.sprite);
@@ -32,9 +33,10 @@ function init(){
     game.ticker.add(play);
 
 
+controlsSetup();
 
 }
-controlsSetup();
+
 
 function play(){
     player.move();
@@ -58,3 +60,19 @@ function initEnemies(){
         x = 50;
     }
 }
+
+function initAnimation(){
+    for(i=0;i<3;i++){
+        let texture = new PIXI.Texture.from(enemySprites[i]);
+        textureArray.push(texture);
+    console.log(texture);
+    }
+
+}
+
+
+
+
+
+
+
