@@ -1,7 +1,7 @@
 class Player{
     constructor(x,y){
         this.id = "Player";
-        this.sprite = Sprite.from(sprites[1])
+        this.sprite = new Sprite.from(sprites[1])
         this.sprite.x = x;
         this.sprite.y = y;
         this.direction = 0 ;

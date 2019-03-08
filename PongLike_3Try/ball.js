@@ -2,7 +2,7 @@ class Ball{
     constructor(x,y){
         this.id = "Ball";
         this.container = new PIXI.Container();
-        this.sprite = Sprite.from(sprites[0]);
+        this.sprite = new Sprite.from(sprites[0]);
         this.container.addChild(this.sprite);
         //Rotation parameters
 
@@ -10,18 +10,20 @@ class Ball{
         this.dx = 1; //Direcao no eixo X
         this.dy = 1; //Direcao no eixo y
         //Translation parameters
+        this.initialx = x;
+        this.initialy = y;
         this.container.x = x;
         this.container.y = y;
         //Collision parameters
         this.collisionType = "NothingYet"
         this.collisionSide = "NothingYet";
         this.collisionPart = "NothingYet"
+        this.collisionNumber = "NothingYet";
 
     }
 
     move(){
         
-        this.rotate();
         this.container.x+= (Math.sin(angleInRadians(this.angle))) * (ballSpeed * this.dx);
         this.container.y+= (Math.cos(angleInRadians(this.angle)) )  *( ballSpeed * this.dy); 
         if(this.checkCollision() == true){
@@ -30,6 +32,22 @@ class Ball{
         }
 
     }
+
+    restart(){
+        this.angle = getRandomInt(-30,30);
+        this.dx = 1; //Direcao no eixo X
+        this.dy = 1; //Direcao no eixo y
+        //Translation parameters
+        this.container.x = this.initialx;
+        this.container.y = this.initialy;
+        //Collision parameters
+        this.collisionType = "NothingYet"
+        this.collisionSide = "NothingYet";
+        this.collisionPart = "NothingYet"
+        this.collisionNumber = "NothingYet";
+
+    }
+
 
     rotate(){
         this.sprite.pivot.x = this.sprite.x+this.sprite.width/2
@@ -75,6 +93,7 @@ class Ball{
                 if(this.container.y+this.container.height >= object.y && this.container.y < object.y){
                     this.collisionType = FullObject.id;
                     this.collisionSide = "TopBorder"
+                    this.collisionNumber = FullObject.idNumber;
                     this.checkCollisionPart(object);
                     return true;
                 }
@@ -82,6 +101,7 @@ class Ball{
                 if(this.container.y+this.container.height >= object.y+object.height && this.container.y < object.y+object.height){
                     this.collisionType = FullObject.id;
                     this.collisionSide = "BottomBorder"
+                    this.collisionNumber = FullObject.idNumber;
                     this.checkCollisionPart(object);
                     return true;
                 }
@@ -98,8 +118,10 @@ class Ball{
 
     collisionEffect(){
         if(this.collisionType == "World"){
-            if(this.collisionSide == "BottomBorder" || this.collisionSide == "TopBorder" )
+            if(this.collisionSide == "TopBorder" )
                 this.dy*=-1;
+            else if(this.collisionSide == "BottomBorder")
+                this.restart();
              else if(this.collisionSide == "LeftBorder" || this.collisionSide == "RightBorder")
                 this.dx*=-1;
 
@@ -123,7 +145,8 @@ class Ball{
                 
             
             }
-
+            if(this.collisionType == "Enemy")
+                objectsList[this.collisionNumber].break();
 
         }
 

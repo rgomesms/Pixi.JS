@@ -10,22 +10,23 @@ loader = new Loader();
 for(sprite of sprites){
     loader.add(sprite);
 }
+loader.add(enemySprite);
+// loader.add(enemySheet);
 loader.load(init)
-
 
 
 function init(){
     console.log("Entered Init"); //////////
     console.log("Finished Loading");
     background = Sprite.from(sprites[2]);
+    game.stage.addChild(background);
     
     player = new Player(300,740);
-    ball = new Ball(320,500);
+    ball = new Ball(320,400);
 
-
+    initEnemies();
+    
     objectsList.push(player);
-
-    game.stage.addChild(background);
     game.stage.addChild(player.sprite);
     game.stage.addChild(ball.container)
     game.ticker.add(play);
@@ -34,8 +35,26 @@ function init(){
 
 }
 controlsSetup();
+
 function play(){
     player.move();
     ball.move();
 
+}
+
+function initEnemies(){
+    let x = 50;
+    let y = 10;
+    let enemyCount = 0;
+    for(j=0;j<4;j++){
+    
+        for(i=0;i<4;i++){
+            objectsList.push(new Enemy(x,y,enemyCount));
+            x+=140;
+            game.stage.addChild(objectsList[enemyCount].sprite); 
+            enemyCount++;
+        }
+        y+=90;
+        x = 50;
+    }
 }

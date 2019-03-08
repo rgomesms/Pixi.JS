@@ -1,6 +1,9 @@
 const sprites = ["resources/greenBall.png",
                 "resources/player.png",
-                "resources/background.png"];
+                "resources/background.png",];
+
+const enemySprite = "resources/enemy.png";
+// const enemySheet = "resources/enemy.json";
 
 const CANVAS_WIDTH = 640;
 const CANVAS_HEIGHT = 800;
@@ -8,8 +11,8 @@ const CANVAS_HEIGHT = 800;
 const WORLD_WIDTH =  CANVAS_WIDTH - 10;  //Tira o tamanho da borda do mapa
 const WORLD_HEIGHT = CANVAS_HEIGHT; //Subtract the end of the world size
 
-const playerSpeed = 3;
-const ballSpeed = 2.5;
+const playerSpeed = 4;
+const ballSpeed = 2;
 const ballRotationSpeed = .1;
 const MinAngleVariation = 15;
 const MaxAngleVariation = 30;
