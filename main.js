@@ -3,7 +3,9 @@ const Sprite = PIXI.Sprite,
       Application = PIXI.Application;
 
 
-const game = new Application({width:CANVAS_WIDTH,height:CANVAS_HEIGHT, backgroundColor:0x1099bb});
+const game = new Application({width:CANVAS_WIDTH,height:CANVAS_HEIGHT, backgroundColor:0x1099bb,resolution:1,autoDensity: true});
+game.renderer.width = window.innerWidth;
+game.renderer.height = window.innerHeight;
 document.body.appendChild(game.view);
 
 loader = new Loader();
