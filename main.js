@@ -86,15 +86,15 @@ function mouseEventsSetup(){
         console.log(game.renderer.plugins.interaction.mouse.global);
         const pointerPosition = game.renderer.plugins.interaction.mouse.global;
         /* Caso o clique tenha sido a direita do meio do jogador, ele move pra direita. Caso contrário, move para a esquerda*/
-        // if(pointerPosition.x > player.sprite.x+player.sprite.width/2)
-        //     player.direction = 1;
-        // else
-            // player.direction = -1;
-        /* Caso o clique tenha sido no canto direito tela, ele move pra direita. Caso contrário, move para a esquerda*/
-        if(pointerPosition.x>CANVAS_WIDTH/2)
+        if(pointerPosition.x > player.sprite.x+player.sprite.width/2)
             player.direction = 1;
         else
             player.direction = -1;
+        /* Caso o clique tenha sido no canto direito tela, ele move pra direita. Caso contrário, move para a esquerda*/
+        // if(pointerPosition.x>CANVAS_WIDTH/2)
+        //     player.direction = 1;
+        // else
+        //     player.direction = -1;
 
     }
 
