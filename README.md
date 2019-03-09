@@ -1,2 +1,2 @@
-# PongLike
-Uma tentativa de reproduzir jogos estilo Pong usando o PixiJS. Material de estudo, não representa um produto final.
+# PIXI JS
+Este repositório se trata de uma tentativa de reproduzir alguns jogos usando o PixiJS. Material de estudo, não representa um produto final.
