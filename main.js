@@ -52,6 +52,7 @@ function play(){
 
 }
 
+
 function initEnemies(){
     let x = 30;
     let y = 30;
