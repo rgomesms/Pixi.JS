@@ -6,6 +6,9 @@ class Enemy{
         // this.AnimatedSprite = new PIXI.AnimatedSprite(textureArray);
         this.sprite.x = x;
         this.sprite.y = y;
+        // this.sprite.width *= .8 ;
+        // this.sprite.height *= .8 ;
+        this.sprite.scale.set (.5);
         this.lives = 3;
     
     }

@@ -45,19 +45,19 @@ function play(){
 }
 
 function initEnemies(){
-    let x = 50;
-    let y = 10;
+    let x = 30;
+    let y = 30;
     let enemyCount = 0;
-    for(j=0;j<4;j++){
+    for(j=0;j<6;j++){
     
-        for(i=0;i<4;i++){
+        for(i=0;i<8;i++){
             objectsList.push(new Enemy(x,y,enemyCount));
-            x+=140;
+            x+=90;
             game.stage.addChild(objectsList[enemyCount].sprite); 
             enemyCount++;
         }
-        y+=90;
-        x = 50;
+        y+=60;
+        x = 30;
     }
 }
 

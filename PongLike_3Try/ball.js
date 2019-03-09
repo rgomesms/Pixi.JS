@@ -30,6 +30,8 @@ class Ball{
             console.log(this.collisionType+this.collisionSide);
             this.collisionEffect();
         }
+        // else
+        // this.rotate();
 
     }
 
@@ -108,7 +110,23 @@ class Ball{
             }
 
             //Verifica se esta na area Y do objeto
-            //Nao implementado
+            if(this.container.y+this.container.height >= object.y && this.container.y <= object.y + object.height){
+                //Colisao no canto esquerdo
+                if(this.container.x+this.container.width >= object.x && this.container.x < object.x + object.width){
+                    this.collisionType = FullObject.id;
+                    this.collisionSide = "LeftBorder";
+                    this.collisionNumber = FullObject.idNumber;
+                    return true;
+                }
+            
+                //Colisao no canto direito
+                else if(this.container.x+this.container.width >= object.x+object.width && this.container.x < object.x + object.width){
+                    this.collisionType = FullObject.id;
+                    this.collisionSide = "RightBorder";
+                    this.collisionNumber = FullObject.idNumber;
+                    return true;
+                }
+            }
 
         }
 
@@ -145,6 +163,15 @@ class Ball{
                 
             
             }
+            
+            else if(this.collisionSide == "LeftBorder")
+                // this.angle = getRandomInt(240+MinAngleVariation,270+MaxAngleVariation);
+                this.angle = getRandomInt(0+MinAngleVariation,0+MaxAngleVariation);
+        
+            else if(this.collisionSide == "RightBorder")
+                // this.angle = getRandomInt(90+MinAngleVariation,90+MaxAngleVariation);
+                    this.angle = getRandomInt(0-MinAngleVariation,0-MaxAngleVariation);
+
             if(this.collisionType == "Enemy")
                 objectsList[this.collisionNumber].break();
 
