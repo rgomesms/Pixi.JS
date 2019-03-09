@@ -16,6 +16,8 @@ for(sprite of enemySprites)
     loader.add(sprite);
 loader.load(init)
 
+
+
 //Esse container contem o jogo
 const mainContainer = new PIXI.Container();
 function init(){
@@ -39,17 +41,27 @@ function init(){
     game.stage.addChild(mainContainer);
     game.ticker.add(play);
 
-
+    controlsSetup()
     pointerEventsSetup();
-    // touchEventsSetup();
 
 }
 
+var fps = 60;
+var now ;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
 
 function play(){
-    player.move();
-    ball.move();
+    now = Date.now();
+    delta = now - then;
+    if(delta>interval){
+        player.move();
+        ball.move();
 
+        then = now - (delta%interval);
+    }
+    
 }
 
 

@@ -22,7 +22,7 @@ class Ball{
 
     }
 
-    move(){
+    move(delta){
         
         this.container.x+= (Math.sin(angleInRadians(this.angle))) * (ballSpeed * this.dx);
         this.container.y+= (Math.cos(angleInRadians(this.angle)) )  *( ballSpeed * this.dy); 
