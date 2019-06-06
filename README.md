@@ -1,5 +1,5 @@
 # Breakout - PixiJS
-This project is an attempt to develop the arcade classic Breakout using PixiJS. 
+This project is an attempt to develop a simple copy the arcade classic Breakout using PixiJS. 
 # Overview
 
 ![](https://github.com/rgomesms/breakout-pixi-js/blob/master/printscreen/image.png)
