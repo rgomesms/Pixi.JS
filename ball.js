@@ -4,20 +4,22 @@ class Ball{
         this.container = new PIXI.Container();
         this.sprite = new Sprite.from(sprites[0]);
         this.container.addChild(this.sprite);
+        
         //Rotation parameters
-
         this.angle = getRandomInt(-30,30);
         this.dx = 1; //Direcao no eixo X
         this.dy = 1; //Direcao no eixo y
+        
         //Translation parameters
         this.initialx = x;
         this.initialy = y;
         this.container.x = x;
         this.container.y = y;
+        
         //Collision parameters
-        this.collisionType = "NothingYet"
+        this.collisionType = "NothingYet";
         this.collisionSide = "NothingYet";
-        this.collisionPart = "NothingYet"
+        this.collisionPart = "NothingYet";
         this.collisionNumber = "NothingYet";
 
     }
@@ -26,21 +28,22 @@ class Ball{
         
         this.container.x+= (Math.sin(angleInRadians(this.angle))) * (ballSpeed * this.dx);
         this.container.y+= (Math.cos(angleInRadians(this.angle)) )  *( ballSpeed * this.dy); 
+
         if(this.checkCollision() == true){
             this.collisionEffect();
         }
-        // else
-        // this.rotate();
 
     }
 
     restart(){
         this.angle = getRandomInt(-30,30);
-        this.dx = 1; //Direcao no eixo X
-        this.dy = 1; //Direcao no eixo y
+        this.dx = 1; //Direction o X axis
+        this.dy = 1; //Direction on Y axis
+        
         //Translation parameters
         this.container.x = this.initialx;
         this.container.y = this.initialy;
+        
         //Collision parameters
         this.collisionType = "NothingYet"
         this.collisionSide = "NothingYet";
@@ -53,7 +56,7 @@ class Ball{
     rotate(){
         this.sprite.pivot.x = this.sprite.x+this.sprite.width/2
         this.sprite.pivot.y = this.sprite.y+this.sprite.height/2
-        this.sprite.rotation+=ballRotationSpeed;
+        this.sprite.rotation += ballRotationSpeed;
     }
 
     checkCollision(){
@@ -89,9 +92,9 @@ class Ball{
 
         for(let FullObject of objectsList){
             const object = FullObject.sprite;
-            //Verifica se esta na area X do objeto
+            //Verify if it's on object X radius
             if(this.container.x+this.container.width>=object.x && this.container.x <= object.x+object.width){
-                //Colisao no topo
+                //Check collision on Top
                 if(this.container.y+this.container.height >= object.y && this.container.y < object.y){
                     this.collisionType = FullObject.id;
                     this.collisionSide = "TopBorder"
@@ -99,7 +102,7 @@ class Ball{
                     this.checkCollisionPart(object);
                     return true;
                 }
-                //Colisao no Bottom
+                //Check collision on Bottom
                 if(this.container.y+this.container.height >= object.y+object.height && this.container.y < object.y+object.height){
                     this.collisionType = FullObject.id;
                     this.collisionSide = "BottomBorder"
@@ -109,9 +112,9 @@ class Ball{
                 }
             }
 
-            //Verifica se esta na area Y do objeto
+            //Verify if it's on object Y radius
             if(this.container.y+this.container.height >= object.y && this.container.y <= object.y + object.height){
-                //Colisao no canto esquerdo
+                //Check collision on left-corner
                 if(this.container.x+this.container.width >= object.x && this.container.x < object.x + object.width){
                     this.collisionType = FullObject.id;
                     this.collisionSide = "LeftBorder";
@@ -119,7 +122,7 @@ class Ball{
                     return true;
                 }
             
-                //Colisao no canto direito
+                //Check collision on right-corner
                 else if(this.container.x+this.container.width >= object.x+object.width && this.container.x < object.x + object.width){
                     this.collisionType = FullObject.id;
                     this.collisionSide = "RightBorder";
@@ -130,21 +133,25 @@ class Ball{
 
         }
 
-    }
-    }
+    }//if(this.sprite)
+    }//!checkCollision
 
 
     collisionEffect(){
+        //Effects of the collision with World
         if(this.collisionType == "World"){
             if(this.collisionSide == "TopBorder" )
                 this.dy*=-1;
-            else if(this.collisionSide == "BottomBorder")
+            else if(this.collisionSide == "BottomBorder"){
+                decreaseLife()
                 this.restart();
+            }
              else if(this.collisionSide == "LeftBorder" || this.collisionSide == "RightBorder")
                 this.dx*=-1;
 
         }
 
+        //Effects of the collision with the Player or some "Enemy" (the hitting blocks)
         else if(this.collisionType == "Player" || this.collisionType == "Enemy"){
             this.dx = this.dy = 1;
             if(this.collisionSide == "TopBorder"){
@@ -152,24 +159,16 @@ class Ball{
                     this.angle = getRandomInt(180+MinAngleVariation,180+MaxAngleVariation);
                 else if(this.collisionPart == "RightPart")
                     this.angle = getRandomInt(180-MinAngleVariation,180-MaxAngleVariation);
-
             }
-
             else if(this.collisionSide = "BottomBorder"){
                 if(this.collisionPart == "LeftPart")
                     this.angle = getRandomInt(0-MinAngleVariation,0-MaxAngleVariation);
                 else if(this.collisionPart == "RightPart")
                     this.angle = getRandomInt(0+MinAngleVariation,0+MaxAngleVariation);
-                
-            
             }
-            
             else if(this.collisionSide == "LeftBorder")
-                // this.angle = getRandomInt(240+MinAngleVariation,270+MaxAngleVariation);
                 this.angle = getRandomInt(0+MinAngleVariation,0+MaxAngleVariation);
-        
             else if(this.collisionSide == "RightBorder")
-                // this.angle = getRandomInt(90+MinAngleVariation,90+MaxAngleVariation);
                     this.angle = getRandomInt(0-MinAngleVariation,0-MaxAngleVariation);
 
             if(this.collisionType == "Enemy")
@@ -179,16 +178,13 @@ class Ball{
 
     }
 
-
+    //This function checks where the ball hits an object, if on it's LeftPart or on it's RightPart 
     checkCollisionPart(object){
         if(this.container.x+(this.container.width/2) < object.x + (object.width/2) )
             this.collisionPart = "LeftPart";
         else
             this.collisionPart = "RightPart"
     }
-
-
-
 
 
 }

@@ -3,21 +3,12 @@ class Enemy{
         this.id = "Enemy";
         this.idNumber = idNumber;
         this.sprite = new Sprite.from(enemySprites[0]);
-
         this.sprite.x = x;
         this.sprite.y = y;
-        // this.sprite.width *= .8 ;
-        // this.sprite.height *= .8 ;
+        
         this.sprite.scale.set (.5);
         this.lives = 3;
     }
-
-    // changeSprite(){
-    //     var spriteNumber = (this.lives-3)*-1;
-    //     this.sprite = new Sprite.from(enemySprites[spriteNumber])
-    //     changeSprite(this.idNumber);
-    // }
-
 
     break(){
         this.lives--;

@@ -11,13 +11,12 @@ class Player{
             this.sprite.x += playerSpeed * this.direction ;
         if(this.checkCollision() == true)
             this.sprite.x -= playerSpeed * this.direction ;
-
     }
 
+    //This function checks collision with the edges of the world
     checkCollision(){
-        //Considerando o tamanho da borda
-        if(player.sprite.x+player.sprite.width < WORLD_WIDTH &&
-           player.sprite.x>10)
+        if(player.sprite.x+player.sprite.width - playerSpeed < WORLD_WIDTH &&
+           player.sprite.x>WORLD_WIDTH_START)
             return false;
         else
             return true;
