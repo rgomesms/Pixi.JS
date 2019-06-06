@@ -1,10 +1,21 @@
----
-permalink: /index.html
----
-# PIXI JS
-Este repositório é uma tentativa de reproduzir alguns jogos usando o PixiJS, enquanto se aprende JS. Trata-se então de um material de estudo, não representando um produto final.
+# Breakout - PixiJS
+This project is an attempt to develop the arcade classic Breakout using PixiJS. 
+# Overview
 
-This repository is an attempt to develop some games using the PixiJS. It's something like a study material, so does not represent a final product.
+![](https://github.com/rgomesms/breakout-pixi-js/blob/master/printscreen/image.png)
 
-Credits:
-Pause icon made by Dave Gandy from www.flaticon.com
+# Controls
+**Keyboard**
+
+	→ - Move Left
+  
+	← - Move Right
+
+**Pointer (Mouser or Touchpad)**
+
+Click on the player's right to move right.
+
+Click on the player's left to move left.  
+
+# Credits
+ - Pause icon made by Dave Gandy from www.flaticon.com
